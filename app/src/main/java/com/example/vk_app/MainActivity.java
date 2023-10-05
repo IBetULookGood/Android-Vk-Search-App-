@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import java.net.URL;
+
+import static com.example.vk_app.utils.NetworkUtils.generateUrl;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                result.setText("Button was pressed!");
+                URL generatedURL = generateUrl(searchField.getText().toString());
+                result.setText(generatedURL.toString());
             }
         };
         searchButton.setOnClickListener(onClickListener);
