@@ -21,7 +21,8 @@ public class NetworkUtils {
         Uri builtUri = Uri.parse(VK_API_BASE_URL + VK_USERS_GET)
                 .buildUpon()
                 .appendQueryParameter(PARAM_USER_ID, userId)
-                .appendQueryParameter(PARAM_VERSION, "5.8")
+                .appendQueryParameter(PARAM_VERSION, "5.81")
+                .appendQueryParameter(ACCESS_TOKEN, "HERE MUST BE YOUR VK_ACCESS_TOKEN")
                 .build();
         URL url = null;
         try {

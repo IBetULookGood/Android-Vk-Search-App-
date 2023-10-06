@@ -1,6 +1,7 @@
 package com.example.vk_app;
 
 import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +22,25 @@ public class MainActivity extends AppCompatActivity {
     private Button searchButton;
     private TextView result;
 
+    class VKQueryTask extends AsyncTask<URL, Void, String>{
+
+        @Override
+        protected String doInBackground(URL... urls) {
+            String response = null;
+            try{
+                response = getResponseFromURL(urls[0]);
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String response){
+            result.setText(response);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 URL generatedURL = generateUrl(searchField.getText().toString());
-                String response = null;
-                try {
-                    response = getResponseFromURL(generatedURL);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                result.setText(response);
+                new VKQueryTask().execute(generatedURL);
             }
         };
         searchButton.setOnClickListener(onClickListener);
