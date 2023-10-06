@@ -7,9 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.io.IOException;
 import java.net.URL;
 
 import static com.example.vk_app.utils.NetworkUtils.generateUrl;
+import static com.example.vk_app.utils.NetworkUtils.getResponseFromURL;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -32,7 +35,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 URL generatedURL = generateUrl(searchField.getText().toString());
-                result.setText(generatedURL.toString());
+                String response = null;
+                try {
+                    response = getResponseFromURL(generatedURL);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                result.setText(response);
             }
         };
         searchButton.setOnClickListener(onClickListener);
