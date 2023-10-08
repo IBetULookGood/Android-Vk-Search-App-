@@ -3,4 +3,5 @@
     <string name="enter_id_in_vk">Enter id in VK</string>
     <string name="search">Search!</string>
     <string name="result_will_be_displayed_be_here">Result will be displayed be here</string>
+    <string name="error_message">An error has occurred, please, try again!</string>
 </resources>
