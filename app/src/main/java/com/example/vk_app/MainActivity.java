@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Button searchButton;
     private TextView result;
     private TextView errorMessage;
+    private ProgressBar loadingIndicator;
 
     private void showResultTextView(){
         result.setVisibility(View.VISIBLE);
@@ -37,8 +39,13 @@ public class MainActivity extends AppCompatActivity {
         errorMessage.setVisibility(View.VISIBLE);
     }
 
-    @SuppressLint("StaticFieldLeak")
+
     class VKQueryTask extends AsyncTask<URL, Void, String>{
+
+        @Override
+        protected void onPreExecute(){
+            loadingIndicator.setVisibility(View.VISIBLE);
+        }
 
         @Override
         protected String doInBackground(URL... urls) {
@@ -75,8 +82,10 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 showErrorTextView();
             }
+            loadingIndicator.setVisibility(View.INVISIBLE);
         }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.b_search_vk);
         result = findViewById(R.id.tv_result);
         errorMessage = findViewById(R.id.tv_error_message);
+        loadingIndicator = findViewById(R.id.pb_loading_indicator);
 
         View.OnClickListener onClickListener = view -> {
             URL generatedURL = generateUrl(searchField.getText().toString());
