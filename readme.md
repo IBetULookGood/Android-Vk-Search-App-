@@ -1,0 +1,2 @@
+# Android App 
+ A quite important and extensive topic in Android is called RecyclerView. With RecyclerView, we can create efficient lists in Android applications, as lists are present in almost every Android application. Our application retrieves information about multiple Vkontakte users simultaneously. Instead of displaying all the information in one component, we display the information in separate components - cells.
